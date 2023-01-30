@@ -45,8 +45,6 @@ myButton.onclick = () => {
 
         console.log(value,value2);
 
-        
-
         allProducts[i].addEventListener("click", function() {
             document.location.href = "product.html?value=" + value + "&Img-link=" + value2;
         });
