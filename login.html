@@ -31,25 +31,41 @@
 
         <div>
             <h2>Login</h2>
-            <form>
+            <form id="login-form">
                 <p>
                 <label for="mail">
                     <span>Email: </span>
                     <strong><span aria-label="required">*</span></strong>
                 </label>
-                <input type="email" id="mail" name="usermail" />
+                <input 
+                    type="email" 
+                    id="mail" 
+                    name="usermail" 
+                    required
+                    minlength="8"
+                    placeholder="abc@email.com" />
                 </p>
                 <p>
                 <label for="pwd">
                     <span>Password: </span>
                     <strong><span aria-label="required">*</span></strong>
                 </label>
-                <input type="password" id="pwd" name="password" />
+                <input 
+                    type="password" 
+                    id="pwd" 
+                    name="password" 
+                    required />
+                </p>
+
+                <p id="invalid-up" hidden="true">
+                    <label>
+                        Invalid username or password
+                    </label>
                 </p>
 
                 <section>
                     <p>
-                      <button type="submit">Login</button>
+                      <button type="submit" id="login-submit">Login</button>
                     </p>
                 </section>
 
@@ -73,21 +89,21 @@
                 <span>Name: </span>
                 <strong><span aria-label="required">*</span></strong>
             </label>
-            <input type="text" id="name" name="username" />
+            <input type="text" id="name" name="username" required/>
             </p>
             <p>
             <label for="mail">
                 <span>Email: </span>
                 <strong><span aria-label="required">*</span></strong>
             </label>
-            <input type="email" id="mail" name="usermail" />
+            <input type="email" id="mail" name="usermail" required/>
             </p>
             <p>
             <label for="pwd">
                 <span>Password: </span>
                 <strong><span aria-label="required">*</span></strong>
             </label>
-            <input type="password" id="pwd" name="password" />
+            <input type="password" id="pwd" name="password" required/>
             </p>
         </section>
 
@@ -108,7 +124,7 @@
                 <span>Card number:</span>
                 <strong><span aria-label="required">*</span></strong>
             </label>
-            <input type="tel" id="number" name="cardnumber" />
+            <input type="tel" id="number" name="cardnumber" required/>
             </p>
             <p>
             <label for="expiration">
