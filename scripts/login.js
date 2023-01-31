@@ -32,9 +32,10 @@ loginBtn.addEventListener("click" , (e)=> {
     }
     else
     {
-        document.cookie = "name=${encodeURIComponent('Jun Sen')}; max-age=${60*60}; path=/";
-        console.log(document.cookie);
-        //document.location.href = "index.html";
+        document.cookie = `name=${encodeURIComponent('Jun Sen')}; max-age=${60*60}; path=/`;
+        //let cookies = document.cookie;
+        //console.log(decodeURIComponent(cookies));
+        document.location.href = "index.html";
     }
 
 

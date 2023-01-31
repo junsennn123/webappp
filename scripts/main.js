@@ -50,6 +50,15 @@ myButton.onclick = () => {
         });
     }
 
+    let nameshow = document.getElementById("RegLog-name");
+
+    console.log(document.cookie);
+
+    if (document.cookie)
+    {
+        nameshow.textContent = document.cookie;
+    }
+
 
     console.log("done");
 
