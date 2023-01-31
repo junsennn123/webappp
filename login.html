@@ -15,8 +15,8 @@
             </a>
 
             <a href="login.html">
-            <h3>Register / Login</h3>
-            </a>
+                <h3 id="RegLog-name">Register / Login</h3>
+                </a>
 
             <nav>
                 <li><a href="index.html">Home</a></li>
@@ -81,7 +81,7 @@
     </div>
 
     <div id="Register" hidden="true">
-        <form>
+        <form id="register-form">
         <section>
             <h2>Contact information</h2>
             <p>
@@ -107,6 +107,7 @@
             </p>
         </section>
 
+        <!--
         <section>
             <h2>Payment information</h2>
             <p>
@@ -139,17 +140,30 @@
                 pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$" />
             </p>
         </section>
+        -->
 
         <section>
             <p>
-              <button type="submit">Register</button>
+              <button type="submit" id="register-submit">Register</button>
             </p>
         </section>
+
+        <p id="Reg-ok" hidden="true">
+            You have successfully registered ! 
+        </p>
+
         </form>
+
 
         <form>  
             <input type="button" onclick="BackToLogin()" value="Back To Login">   
         </form>
+
+    </div>
+
+    <div id="sign-out" hidden="true">
+
+        <button id="sign out"><h3>Sign out</h3></button>
 
     </div>
 

@@ -54,9 +54,13 @@ myButton.onclick = () => {
 
     console.log(document.cookie);
 
-    if (document.cookie)
+    let cookies = document.cookie;
+
+    if (cookies)
     {
-        nameshow.textContent = document.cookie;
+        let wholecookie = decodeURIComponent(cookies).split(",");
+        
+        nameshow.textContent = wholecookie[0].split("=")[1];
     }
 
 
