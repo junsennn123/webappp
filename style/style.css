@@ -206,3 +206,7 @@ a:active {
 .ProductPanel {
   width: 650px;
 }
+
+#ShopList {
+  width: 80% ;
+}
