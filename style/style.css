@@ -185,3 +185,20 @@ a:active {
 .productImg {
   cursor:pointer;
 }
+
+#cartPanel {
+  position: fixed;
+  background-color: aquamarine;
+  width: 600px;
+  height: 400px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+#cartImage {
+  padding-bottom: 20px;
+}
+
+#closeCart {
+  margin-top: 10px;
+}

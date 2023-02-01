@@ -52,7 +52,7 @@ loginBtn.addEventListener("click" , (e)=> {
             }
             else if ( userData.password === password ) {
 
-                document.cookie = `name=${encodeURIComponent(userData.name)},max-age=${60*60},path=/`;
+                document.cookie = `name=${encodeURIComponent(userData.name)};max-age=${60*60};path=/`;
                 //console.log(document.cookie);
                 document.location.href = "index.html";
                 invalidLogin.hidden = true;
@@ -114,7 +114,7 @@ registerBtn.addEventListener("click" , (e)=> {
                     regMsg.textContent = "You have successfully registered ! Bringing to main page in 2 seconds";
 
                     setTimeout(() => {
-                        document.cookie = `name=${encodeURIComponent(name)},max-age=${60*60},path=/`;
+                        document.cookie = `name=${encodeURIComponent(name)};max-age=${60*60};path=/`;
                         //console.log(document.cookie);
                         document.location.href = "index.html";
                     }, 2000);

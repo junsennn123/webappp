@@ -38,15 +38,15 @@ myButton.onclick = () => {
   */
 
   document.addEventListener("DOMContentLoaded", function() {
+
+    // Redirect to product page on click
     var allProducts = document.querySelectorAll(".ProductImg");
     for(i = 0; i < allProducts.length; i++) {
-        var value = allProducts[i].getAttribute("product-value");
-        var value2 = allProducts[i].getAttribute("Img-link");
 
-        console.log(value,value2);
-
-        allProducts[i].addEventListener("click", function() {
-            document.location.href = "product.html?value=" + value + "&Img-link=" + value2;
+        allProducts[i].addEventListener("click", (e)=> {
+            //console.log(e.currentTarget.getAttribute("product-value"));
+            document.location.href = "product.html?value=" + e.currentTarget.getAttribute("product-value") + "&Img-link=" + e.currentTarget.getAttribute("Img-link");
+            //console.log(e.currentTarget.tagName);
         });
     }
 
