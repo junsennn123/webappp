@@ -202,3 +202,7 @@ a:active {
 #closeCart {
   margin-top: 10px;
 }
+
+.ProductPanel {
+  width: 650px;
+}

@@ -45,7 +45,7 @@ myButton.onclick = () => {
 
         allProducts[i].addEventListener("click", (e)=> {
             //console.log(e.currentTarget.getAttribute("product-value"));
-            document.location.href = "product.html?value=" + e.currentTarget.getAttribute("product-value") + "&Img-link=" + e.currentTarget.getAttribute("Img-link");
+            document.location.href = "product.html?value=" + e.currentTarget.getAttribute("product-value") ; //+ "&Img-link=" + e.currentTarget.getAttribute("Img-link");
             //console.log(e.currentTarget.tagName);
         });
     }
