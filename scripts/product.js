@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
  });
 
  let openCartBtn = document.getElementById("addCartPanel");
-
  openCartBtn.addEventListener("click", (e)=> {
     
     let cartPanel = document.getElementById("cartPanel");
@@ -72,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
  });
 
  let closeCartBtn = document.getElementById("closeCart");
-
  closeCartBtn.addEventListener("click", (e)=> {
     
     let cartPanel = document.getElementById("cartPanel");
@@ -88,21 +86,65 @@ document.addEventListener("DOMContentLoaded", function() {
     let cartMsg = document.getElementById("cartLogin");
     cartMsg.hidden = false;
 
-    console.log(document.getElementById("Quant").value);
+    let Quantity = parseInt(document.getElementById("Quant").value);
 
-    if(document.getElementById("Quant").value < 1)
+    console.log(typeof Quantity);
+    console.log(Quantity);
+
+    if(!Quantity || Quantity < 1)
     {
         cartMsg.textContent = "Quantity cannot be lesser than 1";
     }
     else if (document.cookie)
     {
-        cartMsg.textContent = "Successfully added to cart !";
-        
-        setTimeout(() => {
-            cartMsg.hidden = true;
-            let cartPanel = document.getElementById("cartPanel");
-            cartPanel.hidden = true;
-        }, 1000);
+        // connect to DB and update 
+        const request = indexedDB.open("ShoppingApp");
+
+        request.onsuccess = (event) => {
+
+            const db = event.target.result;
+
+            const txn = db.transaction('Users', 'readwrite');
+
+            const store = txn.objectStore('Users');
+
+            let getUserData = store.get(sessionStorage.getItem("userData"));
+
+            getUserData.onsuccess = (event) => {
+                userData = event.target.result;
+                
+                console.log(userData);
+
+                if (productName.textContent in userData.cart )
+                {
+                    userData.cart[productName.textContent] += Quantity;
+                }
+                else
+                {
+                    userData.cart[productName.textContent] = Quantity;
+                }
+
+                let query = store.put(userData);
+
+                query.onsuccess = function (event) {
+                    console.log(event);
+
+                    cartMsg.textContent = "Successfully added to cart !";
+            
+                    setTimeout(() => {
+                        cartMsg.hidden = true;
+                        let cartPanel = document.getElementById("cartPanel");
+                        cartPanel.hidden = true;
+                    }, 1000);
+                };
+
+                query.onerror = function (event) {
+                    console.log(event.target.errorCode);
+
+                    cartMsg.textContent = "Something went wrong";
+                };
+            }
+        }
     }
     else
     {
@@ -117,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
  /***************************** CREATING PRODUCT DATABASE ************************************/
  /*
  (function () {
-    const request = indexedDB.open("ShoppingApp");
+    const request = indexedDB.open("ShoppingApp",3);
 
     request.onerror = (event) => {
         console.error(`Database error: ${event.target.errorCode}`);  

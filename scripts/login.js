@@ -53,6 +53,7 @@ loginBtn.addEventListener("click" , (e)=> {
             else if ( userData.password === password ) {
 
                 document.cookie = `name=${encodeURIComponent(userData.name)};max-age=${60*60};path=/`;
+                sessionStorage.setItem("userData",userData.email);
                 //console.log(document.cookie);
                 document.location.href = "index.html";
                 invalidLogin.hidden = true;
@@ -104,7 +105,8 @@ registerBtn.addEventListener("click" , (e)=> {
                     email: usermail,
                     password: password,
                     name: name,
-                    role: 'User'
+                    role: 'User',
+                    cart: []
                 });
         
                 query.onsuccess = function (event) {
@@ -115,6 +117,7 @@ registerBtn.addEventListener("click" , (e)=> {
 
                     setTimeout(() => {
                         document.cookie = `name=${encodeURIComponent(name)};max-age=${60*60};path=/`;
+                        sessionStorage.setItem("userData",usermail);
                         //console.log(document.cookie);
                         document.location.href = "index.html";
                     }, 2000);
@@ -145,7 +148,7 @@ signout.addEventListener("click" , (e)=> {
     
     //delete cookie
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-    
+    sessionStorage.removeItem("userData");
     document.location.reload();
 
 });
@@ -292,14 +295,16 @@ function insertUser(db, user){
             email: 'admin@admin.com',
             password: 'password',
             name: 'Admin',
-            role: 'Admin'
+            role: 'Admin',
+            cart: []
         });
 
         insertUser(db, {
             email: 'user1@gmail.com',
             password: 'password',
             name: 'User 1',
-            role: 'User'
+            role: 'User',
+            cart: []
         });
 
         //getUserByEmail(db, "admin@admin.com");
