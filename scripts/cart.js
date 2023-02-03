@@ -1,3 +1,5 @@
+let cartList = []
+
 document.addEventListener("DOMContentLoaded", function() {
 
     let nameshow = document.getElementById("RegLog-name");
@@ -56,29 +58,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 theDiv.removeChild(empty);
                                 empty = null;
                             }
+
+                            cartList.push([product,userData.cart[product.name]]);
                             
-                            let name = document.createElement("p");
-                            name.textContent = product.name ;
-                            name.style.fontSize = "30px";
-                            name.style.color = "yellow";
-                            name.style.display = "inline-block";
-
-                            let Quantity = document.createElement("p");
-                            Quantity.textContent = "x " + userData.cart[product.name] ;
-                            Quantity.style.fontSize = "30px";
-                            Quantity.style.color = "red";
-                            Quantity.style.display = "inline-block";
-
-                            let TPrice = document.createElement("p");
-                            TPrice.textContent = "=$ " + userData.cart[product.name] * product.price ;
-                            TPrice.style.fontSize = "30px";
-                            TPrice.style.color = "gold";
-                            TPrice.style.display = "inline-block";
-
-                            theDiv.appendChild(name);
-                            theDiv.appendChild(Quantity);
-                            theDiv.appendChild(TPrice);
-
                             // adding image and setting link to each one.
                             let img = document.createElement("img");
                             img.addEventListener("click", (e)=> {
@@ -87,13 +69,88 @@ document.addEventListener("DOMContentLoaded", function() {
                                 //console.log(e.currentTarget.tagName);
                             });
                             img.src = product.imgsrc ;
-                            img.style.marginTop = "-30px";
+                            img.style.marginBottom = "-30px";
                             img.style.display = "block";
 
+                            let name = document.createElement("p");
+                            name.textContent = product.name  ;
+                            name.style.fontSize = "30px";
+                            name.style.color = "yellow";
+                            //name.style.display = "inline-block";
 
-                            //img.width = "100px";
+                            /*
+                            let Quantity = document.createElement("p");
+                            Quantity.textContent = "x " + userData.cart[product.name] ;
+                            Quantity.style.fontSize = "30px";
+                            Quantity.style.color = "red";
+                            Quantity.style.display = "inline-block";
+                            */
+
+                            let EPrice = document.createElement("p");
+                            EPrice.textContent = "$ " + product.price + " x ";
+                            EPrice.style.fontSize = "30px";
+                            EPrice.style.color = "gold";
+                            EPrice.style.display = "inline-block";
+                            EPrice.style.marginTop = "-30px";
+                            EPrice.id = `${product.name}-eprice`;
+
+                            let Quantity = document.createElement("input");
+                            Quantity.type = "number";
+                            Quantity.value = userData.cart[product.name] ;
+                            Quantity.style.fontSize = "30px";
+                            Quantity.style.color = "red";
+                            Quantity.style.display = "inline-block";
+                            Quantity.id = `${product.name}-quant`;
+                            Quantity.min = 0;
+                            Quantity.style.marginTop = "-30px";
+                            Quantity.style.width = "80px";
+
+                            //<input id="number" type="number" value="42" />
+                            
+                            
+
+                            /*for( let i = 0 ; i < cartList.length; i++)
+                            {
+                                $(`#${cartList[i][0].name}-quant`).onchange(function () {
+                                    if ($(this).data('old-value') != $(this).val()) {
+                                        alert(cartList[i][0].name);
+                                    } 
+                                    $(this).data('old-value', $(this).val());
+                                })
+
+                            }*/
+                            
+                            let TPrice = document.createElement("p");
+                            TPrice.textContent = "= $ " + userData.cart[product.name] * product.price ;
+                            TPrice.style.fontSize = "30px";
+                            TPrice.style.color = "gold";
+                            TPrice.style.display = "inline-block";
+                            TPrice.style.marginTop = "-30px";
+                            TPrice.id = `${product.name}-tprice`;
 
                             theDiv.appendChild(img);
+                            theDiv.appendChild(name);
+                            theDiv.appendChild(EPrice);
+                            theDiv.appendChild(Quantity);
+                            theDiv.appendChild(TPrice);
+
+                            Quantity.onchange = function() {
+                                TPrice.textContent = "= $ " + Quantity.value * product.price ;
+
+                                userData.cart[product.name] = parseInt(Quantity.value);
+                                
+                                const uctxn = db.transaction('Users', 'readwrite');
+                                const ucstore = uctxn.objectStore('Users');
+                                let updateCart = ucstore.put(userData);
+
+                                updateCart.onsuccess = (event) => {
+                                    console.log(event);
+                                };
+
+                            };
+
+                            //img.width = "100px";
+                            
                             productCount += 1;
                         }
 
@@ -113,5 +170,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
  });
-
- 

@@ -28,7 +28,49 @@
 <main>
 
     <div>
-        <h1>account details</h1>
+        <h1>edit account details</h1>
+    </div>
+
+    <div id="account-details">
+      
+      <form id="account-form" hidden="true">
+        <section>
+            <p>
+            <label for="name">
+                <span>Name: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="text" id="aname" name="username" required/>
+            </p>
+            <p>
+            <label for="mail">
+                <span>Email: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="email" id="amail" name="usermail" required/>
+            </p>
+            <p>
+            <label for="pwd">
+                <span>Password: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="password" id="apwd" name="password" required/>
+            </p>
+        </section>
+
+        <section>
+            <p>
+              <button type="submit" id="account-edit">Save</button>
+            </p>
+        </section>
+
+        <p id="save-ok" hidden="true">
+            You have successfully changed your details ! 
+        </p>
+
+        </form>
+
+
     </div>
 
 </main>
