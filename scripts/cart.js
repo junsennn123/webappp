@@ -78,14 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             name.style.color = "yellow";
                             //name.style.display = "inline-block";
 
-                            /*
-                            let Quantity = document.createElement("p");
-                            Quantity.textContent = "x " + userData.cart[product.name] ;
-                            Quantity.style.fontSize = "30px";
-                            Quantity.style.color = "red";
-                            Quantity.style.display = "inline-block";
-                            */
-
                             let EPrice = document.createElement("p");
                             EPrice.textContent = "$ " + product.price + " x ";
                             EPrice.style.fontSize = "30px";
@@ -104,21 +96,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             Quantity.min = 0;
                             Quantity.style.marginTop = "-30px";
                             Quantity.style.width = "80px";
-
-                            //<input id="number" type="number" value="42" />
-                            
-                            
-
-                            /*for( let i = 0 ; i < cartList.length; i++)
-                            {
-                                $(`#${cartList[i][0].name}-quant`).onchange(function () {
-                                    if ($(this).data('old-value') != $(this).val()) {
-                                        alert(cartList[i][0].name);
-                                    } 
-                                    $(this).data('old-value', $(this).val());
-                                })
-
-                            }*/
                             
                             let TPrice = document.createElement("p");
                             TPrice.textContent = "= $ " + userData.cart[product.name] * product.price ;

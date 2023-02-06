@@ -74,6 +74,9 @@ registerBtn.addEventListener("click" , (e)=> {
     const usermail = registerForm.usermail.value;
     const password = registerForm.password.value;
     const name = registerForm.username.value;
+    const role = registerForm.userRole.checked ? "Seller": "User";
+
+    console.log(role);
 
     /*
     await checkValidUser(usermail).then((data)=> {
@@ -105,7 +108,7 @@ registerBtn.addEventListener("click" , (e)=> {
                     email: usermail,
                     password: password,
                     name: name,
-                    role: 'User',
+                    role: role,
                     cart: []
                 });
         

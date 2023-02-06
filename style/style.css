@@ -215,3 +215,7 @@ a:active {
 article {
   width: 97%;
 }
+
+table, th, td {
+  border: 1px solid;
+}
