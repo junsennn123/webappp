@@ -2,19 +2,8 @@ let adminDiv = document.getElementById("adminDiv");
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    let nameshow = document.getElementById("RegLog-name");
-
-    console.log(document.cookie);
-
-    let cookies = document.cookie;
-
-    if (cookies)
+    if (document.cookie)
     {
-        let wholecookie = decodeURIComponent(cookies).split(",");
-        
-        nameshow.textContent = wholecookie[0].split("=")[1];
-
-
         // Show all the users with details
 
         const request = indexedDB.open("ShoppingApp");
@@ -25,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const txn = db.transaction('Users','readonly');
             const store = txn.objectStore('Users');
 
-            let query = store.get(sessionStorage.getItem("userData"));
+            //let query = store.get(sessionStorage.getItem("userData"));
 
             /*
             query.onsuccess = (event) => {
@@ -45,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let thead = document.createElement("thead");
             let th = document.createElement("th");
             th.textContent = "Users";
+            th.colSpan = "5";
 
             thead.appendChild(th);
             newTable.appendChild(thead);
@@ -66,10 +56,14 @@ document.addEventListener("DOMContentLoaded", function() {
             let roleH = document.createElement("td");
             roleH.textContent = "Role" ;
 
+            let deleteH = document.createElement("td");
+            deleteH.textContent = "Delete" ;
+
             trH.appendChild(nameH);
             trH.appendChild(emailH);
             trH.appendChild(passwordH);
             trH.appendChild(roleH);
+            trH.appendChild(deleteH);
 
             newTbody.appendChild(trH);
 
@@ -89,20 +83,66 @@ document.addEventListener("DOMContentLoaded", function() {
                     nameinput.type = "text";
                     nameinput.value = users.name;
                     name.appendChild(nameinput);
+                    //name.textContent = users.name ;
 
                     let email = document.createElement("td");
                     email.textContent = users.email ;
 
                     let password = document.createElement("td");
-                    password.textContent = users.password ;
+                    let passwordinput = document.createElement("input");
+                    passwordinput.type = "password";
+                    passwordinput.value = users.password;
+                    password.appendChild(passwordinput);
+                    //password.textContent = users.password ;
 
                     let role = document.createElement("td");
-                    role.textContent = users.role ;
+                    let roleinput = document.createElement("select");
+
+                    roleinput.onchange = function () {
+                        console.log(roleinput.options[roleinput.selectedIndex].text);
+                    };
+
+                    let optionUser = document.createElement("option");
+                    optionUser.textContent = "User";
+                    optionUser.selected = "User" === users.role;
+                    let optionSeller = document.createElement("option");
+                    optionSeller.textContent = "Seller";
+                    optionSeller.selected = "Seller" === users.role;
+                    let optionAdmin = document.createElement("option");
+                    optionAdmin.textContent = "Admin";
+                    optionAdmin.selected = "Admin" === users.role;
+
+                    roleinput.appendChild(optionUser);
+                    roleinput.appendChild(optionSeller);
+                    roleinput.appendChild(optionAdmin);
+                    role.appendChild(roleinput);
+                    //role.textContent = users.role ;
+
+                    let deleteButtonTD = document.createElement("td");
+                    let deleteButton = document.createElement("button");
+                    deleteButton.textContent = `Delete ${users.name}`;
+
+                    deleteButton.addEventListener("click" , (e)=> {
+                        
+                        const deleteUtxn = db.transaction('Users', 'readwrite');
+                        const deleteUstore = deleteUtxn.objectStore('Users');
+                        let deleteQuery = deleteUstore.delete(users.email);
+
+                        deleteQuery.onsuccess = (event) => {
+                            alert(`${users.name}\'s account has been deleted`);
+                            setTimeout(() => {
+                                document.location.reload();
+                            }, 1000);
+                        };
+                    });
+                    deleteButtonTD.appendChild(deleteButton);
+
 
                     tr.appendChild(name);
                     tr.appendChild(email);
                     tr.appendChild(password);
                     tr.appendChild(role);
+                    tr.append(deleteButtonTD);
 
                     newTbody.appendChild(tr);
 
@@ -119,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let theadP = document.createElement("thead");
             let thP = document.createElement("th");
             thP.textContent = "Products";
+            thP.colSpan = "6";
 
             theadP.appendChild(thP);
             newTableP.appendChild(theadP);
@@ -148,12 +189,16 @@ document.addEventListener("DOMContentLoaded", function() {
             let tagsH = document.createElement("td");
             tagsH.textContent = "Tags" ;
 
+            let deletePH = document.createElement("td");
+            deletePH.textContent = "Delete" ;
+
             trH.appendChild(nameH);
             trH.appendChild(priceH);
             trH.appendChild(descriptionH);
             trH.appendChild(stockH);
             //trH.appendChild(imgsrcH);
             trH.appendChild(tagsH);
+            trH.appendChild(deletePH);
 
             newTbodyP.appendChild(trH);
 
@@ -171,13 +216,25 @@ document.addEventListener("DOMContentLoaded", function() {
                     name.textContent = product.name ;
 
                     let price = document.createElement("td");
-                    price.textContent = product.price ;
+                    let priceinput = document.createElement("input");
+                    priceinput.type = "number";
+                    priceinput.value = product.price;
+                    price.appendChild(priceinput);
+                    //price.textContent = product.price ;
 
                     let description = document.createElement("td");
-                    description.textContent = product.description ;
+                    let descriptioninput = document.createElement("input");
+                    descriptioninput.type = "text";
+                    descriptioninput.value = product.description;
+                    description.appendChild(descriptioninput);
+                    //description.textContent = product.description ;
 
                     let stock = document.createElement("td");
-                    stock.textContent = product.stock ;
+                    let stockinput = document.createElement("input");
+                    stockinput.type = "number";
+                    stockinput.value = product.stock;
+                    stock.appendChild(stockinput);
+                    //stock.textContent = product.stock ;
 
                     /*
                     let imgsrc = document.createElement("td");
@@ -187,12 +244,34 @@ document.addEventListener("DOMContentLoaded", function() {
                     let tags = document.createElement("td");
                     tags.textContent = product.tag ;
 
+
+                    let deletePButtonTD = document.createElement("td");
+                    let deletePButton = document.createElement("button");
+                    deletePButton.textContent = `Delete ${product.name}`;
+
+                    deletePButton.addEventListener("click" , (e)=> {
+                        
+                        const deletePtxn = db.transaction('Products', 'readwrite');
+                        const deletePstore = deletePtxn.objectStore('Products');
+                        let deletePQuery = deletePstore.delete(product.name);
+
+                        deletePQuery.onsuccess = (event) => {
+                            alert(`Product ${product.name} has been deleted`);
+                            setTimeout(() => {
+                                document.location.reload();
+                            }, 1000);
+                        };
+                    });
+                    deletePButtonTD.appendChild(deletePButton);
+
+
                     tr.appendChild(name);
                     tr.appendChild(price);
                     tr.appendChild(description);
                     tr.appendChild(stock);
                     //tr.appendChild(imgsrc);
                     tr.appendChild(tags);
+                    tr.appendChild(deletePButtonTD);
 
                     newTbodyP.appendChild(tr);
 

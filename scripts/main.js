@@ -71,15 +71,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    // Set the name after login 
-    let nameshow = document.getElementById("RegLog-name");
-
-    let cookies = document.cookie;
-
-    if (cookies)
-    {
-        let wholecookie = decodeURIComponent(cookies).split(",");
-        nameshow.textContent = wholecookie[0].split("=")[1];
-    }
-
  });

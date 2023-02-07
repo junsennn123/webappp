@@ -219,3 +219,13 @@ article {
 table, th, td {
   border: 1px solid;
 }
+
+table {
+  width: 95%;
+  margin: 30px;
+}
+
+th {
+  text-align: center;
+  vertical-align: top;
+}

@@ -1,0 +1,125 @@
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Ong Jun Sen">
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Cinzel+Decorative:700" rel="stylesheet">
+  </head>
+  <body>
+	<header>
+            <h1>Shopping Boi</h1>
+            
+            <a href="cart.html">
+                  <img src ="image/shopping_cart.png" alt="Cart">
+            </a>
+
+            <a href="login.html">
+              <h3 id="RegLog-name">Register / Login</h3>
+              </a>
+
+            <nav id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="feed.html">Feed</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="account.html">Account</a></li>
+            </nav>
+	</header>
+<main>
+
+    <div id="addProductDiv">
+      <form id="addProduct-form">
+      <section>
+          <h2>Add new product</h2>
+          <p>
+          <label for="name">
+              <span>Name: </span>
+              <strong><span aria-label="required">*</span></strong>
+          </label>
+          <input type="text" id="pname" name="productName" required/>
+          </p>
+
+          <p>
+          <label for="price">
+              <span>Price: </span>
+              <strong><span aria-label="required">* $</span></strong>
+          </label>
+          <input type="number" id="pprice" name="productPrice" required/>
+          </p>
+
+          <p>
+          <label for="description">
+              <span>Description: </span>
+              <strong><span aria-label="required">*</span></strong>
+          </label>
+          <input type="text" id="pdescription" name="productDescription" required style="width:200px ; height:150px"/>
+          </p>
+
+          <p>
+            <label for="stock">
+                <span>Stock: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="number" id="pstock" name="productStock" required/>
+          </p>
+
+          <p>
+            <label for="tags">
+                <span>Product Tags: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="text" id="ptag" name="productTag" required style="width:200px ; height:150px"/>
+          </p>
+
+          <p>
+            <label for="image">
+                <span>Product Image: </span>
+                <strong><span aria-label="required">*</span></strong>
+            </label>
+            <input type="file" id="pimage" name="productImage" required accept="image/*"/>
+          </p>
+
+          <p>
+            <img src="#" id="pimage-preview" alt="Preview" width="100px" height="100px" hidden="true">  
+          </p>
+
+          <!--
+          <p>
+          <input type="checkbox" id="sellerCB" name="userRole" value="Seller">
+          <label for="sellerCB">Seller</label>
+          </p>
+          -->
+
+
+      
+        </section>
+
+      <section>
+          <p>
+            <button type="submit" id="addProduct-submit">Add product</button>
+          </p>
+      </section>
+
+      <p id="AddP-ok" hidden="true">
+          You have successfully added new product ! 
+      </p>
+
+      </form>
+
+    </div>
+
+
+</main>
+
+<footer>
+      <p> Shopping mall but online </p>
+
+      <p><a href="#">Shop shop</a> by Jun Sen</p>
+
+</footer> 
+
+<script src="scripts/addProduct"></script>
+<script src="scripts/checkuser.js" defer></script>
+
+</body>
+</html>

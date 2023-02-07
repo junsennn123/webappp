@@ -2,21 +2,13 @@ let accountForm = document.getElementById("account-form");
 let submitBtn = document.getElementById("account-edit");
 let saveMsg = document.getElementById("save-ok");
 
-let nameshow = document.getElementById("RegLog-name");
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    let cookies = document.cookie;
+document.addEventListener("readystatechange", function() {
 
     let mainDiv = document.getElementById("account-details");
 
-    if (cookies)
+    if (document.cookie)
     {
         // set name for top right 
-        let wholecookie = decodeURIComponent(cookies).split(",");
-        nameshow.textContent = wholecookie[0].split("=")[1];
-
-
         const request = indexedDB.open("ShoppingApp");
 
         request.onsuccess = (event) => {
@@ -41,12 +33,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     else
     {
-        let loginPlease = document.createElement("p");
+        let loginPlease = document.getElementById("loginFirst");
+        loginPlease.hidden = false;
         loginPlease.textContent = "Please login first ";
         loginPlease.style.fontSize = "40px";
         loginPlease.style.color = "red";
 
-        mainDiv.appendChild(loginPlease);
     }
 
  });

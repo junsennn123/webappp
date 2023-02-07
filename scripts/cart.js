@@ -2,16 +2,10 @@ let cartList = []
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    let nameshow = document.getElementById("RegLog-name");
-
     let theDiv = document.getElementById("cart");
 
     if (document.cookie)
     {
-        let wholecookie = decodeURIComponent(document.cookie).split(",");
-        
-        nameshow.textContent = wholecookie[0].split("=")[1];
-
         // connect to DB and update 
         const request = indexedDB.open("ShoppingApp");
 
