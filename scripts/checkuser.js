@@ -24,43 +24,17 @@ document.addEventListener("readystatechange", function() {
 
             query.onsuccess = (event) => {
                 userData = event.target.result;
-
-                //let navbar = document.getElementById("navbar");
-                //let li = document.createElement("li");
                     
                 if(userData.role === "Seller")
                 {
-                    /*
-                    let aref = document.createElement("a");
-                    aref.href = "addproduct.html";
-                    aref.textContent = "Add Product";
-                    li.appendChild(aref);
-                    navbar.appendChild(li);
-                    */
-
                     let addPNavBar = document.getElementById("addPNavBar");
                     addPNavBar.style.display = "initial";
-
                 }
                 else if(userData.role === "Admin")
                 {
-                    /*
-                    let aref = document.createElement("a");
-                    aref.href = "admin.html";
-                    aref.textContent = "Admin";
-                    li.appendChild(aref);
-                    navbar.appendChild(li);
-                    */
-
-                    
-
                     let adminNavBar = document.getElementById("adminNavBar");
                     adminNavBar.style.display = "initial";
-
                 }
-
-                
-
             }
         }
 
