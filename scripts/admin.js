@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let thead = document.createElement("thead");
             let th = document.createElement("th");
             th.textContent = "Users";
-            th.colSpan = "5";
+            th.colSpan = "6";
 
             thead.appendChild(th);
             newTable.appendChild(thead);
@@ -59,11 +59,15 @@ document.addEventListener("DOMContentLoaded", function() {
             let deleteH = document.createElement("td");
             deleteH.textContent = "Delete" ;
 
+            let saveH = document.createElement("td");
+            saveH.textContent = "Save changes" ;
+
             trH.appendChild(nameH);
             trH.appendChild(emailH);
             trH.appendChild(passwordH);
             trH.appendChild(roleH);
             trH.appendChild(deleteH);
+            trH.appendChild(saveH);
 
             newTbody.appendChild(trH);
 
@@ -137,12 +141,40 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                     deleteButtonTD.appendChild(deleteButton);
 
+                    let saveButtonTD = document.createElement("td");
+                    let saveButton = document.createElement("button");
+                    saveButton.textContent = `Save`;
+
+                    saveButton.addEventListener("click" , (e)=> {
+                        
+                        const saveUtxn = db.transaction('Users', 'readwrite');
+                        const saveUstore = saveUtxn.objectStore('Users');
+                        
+                        users.name = nameinput.value;
+                        users.password = passwordinput.value;
+                        users.role = roleinput.options[roleinput.selectedIndex].text;
+
+                        let updateAccount = saveUstore.put(users);
+
+                        updateAccount.onsuccess = (event) => {
+                        
+                            alert(`${users.name}\'s account has been updated`);
+                            setTimeout(() => {
+                                document.location.reload();
+                            }, 1000);
+
+                        };
+
+                    });
+                    saveButtonTD.appendChild(saveButton);
+
 
                     tr.appendChild(name);
                     tr.appendChild(email);
                     tr.appendChild(password);
                     tr.appendChild(role);
-                    tr.append(deleteButtonTD);
+                    tr.appendChild(deleteButtonTD);
+                    tr.appendChild(saveButton);
 
                     newTbody.appendChild(tr);
 
@@ -159,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let theadP = document.createElement("thead");
             let thP = document.createElement("th");
             thP.textContent = "Products";
-            thP.colSpan = "6";
+            thP.colSpan = "7";
 
             theadP.appendChild(thP);
             newTableP.appendChild(theadP);
@@ -192,6 +224,9 @@ document.addEventListener("DOMContentLoaded", function() {
             let deletePH = document.createElement("td");
             deletePH.textContent = "Delete" ;
 
+            let savePH = document.createElement("td");
+            savePH.textContent = "Save changes" ;
+
             trH.appendChild(nameH);
             trH.appendChild(priceH);
             trH.appendChild(descriptionH);
@@ -199,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
             //trH.appendChild(imgsrcH);
             trH.appendChild(tagsH);
             trH.appendChild(deletePH);
+            trH.appendChild(savePH);
 
             newTbodyP.appendChild(trH);
 
@@ -233,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     let stockinput = document.createElement("input");
                     stockinput.type = "number";
                     stockinput.value = product.stock;
+                    stockinput.style.width = "50px";
                     stock.appendChild(stockinput);
                     //stock.textContent = product.stock ;
 
@@ -265,6 +302,34 @@ document.addEventListener("DOMContentLoaded", function() {
                     deletePButtonTD.appendChild(deletePButton);
 
 
+                    let savePButtonTD = document.createElement("td");
+                    let savePButton = document.createElement("button");
+                    savePButton.textContent = `Save`;
+
+                    savePButton.addEventListener("click" , (e)=> {
+                        
+                        const savePtxn = db.transaction('Products', 'readwrite');
+                        const savePstore = savePtxn.objectStore('Products');
+                        
+                        product.price = priceinput.value;
+                        product.description = descriptioninput.value;
+                        product.stock = stockinput.value;
+
+                        let updateProduct = savePstore.put(product);
+
+                        updateProduct.onsuccess = (event) => {
+                        
+                            alert(`${product.name}\ has been updated`);
+                            setTimeout(() => {
+                                document.location.reload();
+                            }, 1000);
+
+                        };
+
+                    });
+                    savePButtonTD.appendChild(savePButton);
+
+
                     tr.appendChild(name);
                     tr.appendChild(price);
                     tr.appendChild(description);
@@ -272,6 +337,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //tr.appendChild(imgsrc);
                     tr.appendChild(tags);
                     tr.appendChild(deletePButtonTD);
+                    tr.appendChild(savePButtonTD);
 
                     newTbodyP.appendChild(tr);
 
