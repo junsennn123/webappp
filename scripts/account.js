@@ -43,7 +43,7 @@ document.addEventListener("readystatechange", function() {
 
  });
 
- submitBtn.addEventListener("click" , (e)=> {
+ accountForm.onsubmit = function(e){
     e.preventDefault();
 
     const request = indexedDB.open("ShoppingApp");
@@ -86,4 +86,4 @@ document.addEventListener("readystatechange", function() {
     }
 
         
-});
+};

@@ -20,7 +20,7 @@ let loginBtn = document.getElementById("login-submit");
 let loginForm = document.getElementById("login-form");
 let invalidLogin = document.getElementById("invalid-up");
 
-loginBtn.addEventListener("click" , (e)=> {
+loginForm.onsubmit = function(e){
     e.preventDefault();
 
     const usermail = loginForm.usermail.value;
@@ -63,12 +63,12 @@ loginBtn.addEventListener("click" , (e)=> {
 
     }
 
-});
+};
 
 let registerBtn = document.getElementById("register-submit");
 let registerForm = document.getElementById("register-form");
 let regMsg = document.getElementById("Reg-ok");
-registerBtn.addEventListener("click" , (e)=> {
+registerForm.onsubmit = function(e){
     e.preventDefault();
 
     const usermail = registerForm.usermail.value;
@@ -141,7 +141,7 @@ registerBtn.addEventListener("click" , (e)=> {
         
     }
 
-});
+};
 
 let signout = document.getElementById("sign-out");
 

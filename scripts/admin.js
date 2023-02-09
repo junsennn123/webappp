@@ -150,6 +150,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         const saveUtxn = db.transaction('Users', 'readwrite');
                         const saveUstore = saveUtxn.objectStore('Users');
                         
+                        if (nameinput.value === "" || passwordinput.value === "")
+                        {
+                            alert("Cannot leave any field empty");
+                            return;
+                        }
+
                         users.name = nameinput.value;
                         users.password = passwordinput.value;
                         users.role = roleinput.options[roleinput.selectedIndex].text;
@@ -311,6 +317,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         const savePtxn = db.transaction('Products', 'readwrite');
                         const savePstore = savePtxn.objectStore('Products');
                         
+                        if (priceinput.value === "" || descriptioninput.value === "" ||
+                        stockinput.value === "")
+                        {
+                            alert("Cannot leave any field empty");
+                            return;
+                        }
+
                         product.price = priceinput.value;
                         product.description = descriptioninput.value;
                         product.stock = stockinput.value;

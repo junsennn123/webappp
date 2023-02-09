@@ -20,7 +20,7 @@ productImage.addEventListener('change', (event) => {
 let addBtn = document.getElementById("addProduct-submit");
 let addForm = document.getElementById("addProduct-form");
 let addMsg = document.getElementById("AddP-ok");
-addBtn.addEventListener("click" , (e)=> {
+addForm.onsubmit = function(e){
     e.preventDefault();
 
     const name = addForm.productName.value;
@@ -84,4 +84,4 @@ addBtn.addEventListener("click" , (e)=> {
             }
         }
     }
-});
+};
