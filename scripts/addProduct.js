@@ -17,6 +17,33 @@ productImage.addEventListener('change', (event) => {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    let addProductDiv = document.getElementById("addProductDiv");
+
+    if (document.cookie)
+    {
+        const request = indexedDB.open("ShoppingApp");
+
+        request.onsuccess = (event) => {
+            let query = store.get(sessionStorage.getItem("userData"));
+
+            query.onsuccess = (event) => {
+                userData = event.target.result;
+
+                if(userData.role === "Admin" || userData.role === "Seller")
+                    addProductDiv.hidden = false;
+                else
+                    addProductDiv.hidden = true;
+            }
+        }
+    }
+    else
+    {
+        addProductDiv.hidden = true;
+    }
+});
+
 let addBtn = document.getElementById("addProduct-submit");
 let addForm = document.getElementById("addProduct-form");
 let addMsg = document.getElementById("AddP-ok");

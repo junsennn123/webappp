@@ -14,18 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const txn = db.transaction('Users','readonly');
             const store = txn.objectStore('Users');
 
-            //let query = store.get(sessionStorage.getItem("userData"));
+            let query = store.get(sessionStorage.getItem("userData"));
 
-            /*
+            
             query.onsuccess = (event) => {
                 userData = event.target.result;
 
-                if(userData)
+                if(userData.role === "Admin")
                     adminDiv.hidden = false;
                 else
                     adminDiv.hidden = true;
-
-            }*/
+            }
 
 
             let newTable = document.createElement("table");
