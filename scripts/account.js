@@ -24,7 +24,7 @@ document.addEventListener("readystatechange", function() {
 
                 accountForm.hidden = false;
 
-                accountForm.usermail.value = userData.email;
+                //accountForm.usermail.value = userData.email;
                 accountForm.password.value = userData.password;
                 accountForm.username.value = userData.name;
             }
